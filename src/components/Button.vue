@@ -1,26 +1,25 @@
 <template>
-    <button v-bind:type="type" :class="{'btn': true, 'btn--outlined': outlined}">
-        <slot></slot>
-    </button>
+  <button v-bind:type="type" v-bind:class="{'btn': true, 'btn--outlined': outlined}">
+    <slot></slot>
+  </button>
 </template>
 
 <script>
-    export default {
-        
-        // eslint-disable-next-line vue/multi-word-component-names
-        name: 'Button',
+  export default {
+    // eslint-disable-next-line vue/multi-word-component-names
+    name: 'Button',
 
-        props: {
-            type: {
-              type: String,
-              default: "button"
-            },
-            outlined: {
-              type: Boolean,
-              default: false
-            }
-        }
+    props: {
+      type: {
+        type: String,
+        default: "button"
+      },
+      outlined: {
+        type: Boolean,
+        default: false
+      }
     }
+  }
 </script>
 
 <style lang="scss" scoped>

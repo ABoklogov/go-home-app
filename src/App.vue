@@ -1,17 +1,23 @@
 <template>
   <h1>{{title}}</h1>
-  <Button @click='increment' outlined>Click my</Button>
+  <!-- <Button v-on:click='increment' outlined>Click my</Button> -->
+  <StarRating :rating="4.5"/>
+  <!-- <DirectivesTest/> -->
 </template>
 
 <script>
 
-import Button from './components/Button.vue'
+// import Button from './components/Button.vue'
+// import DirectivesTest from './components/DirectivesTest.vue'
+import StarRating from './components/StarRating.vue';
 
 export default {
   name: 'App',
 
   components: {
-    Button
+    // Button,
+    StarRating,
+    // DirectivesTest,
   },
 
   data() {

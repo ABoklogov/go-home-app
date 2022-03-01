@@ -7,7 +7,7 @@
           {{descr}}
         </p>
         <div class="apartments-item__rating">
-          <StarRating :rating="rating"/>
+          <StarRating v-bind:rating="rating"/>
         </div>
         <div class="apartments-item__price">UAH {{price}} за ночь</div>
       </div>
@@ -42,7 +42,11 @@ import StarRating from '../StarRating.vue'
         type: String,
         default: ''
       }
-    }
+    },
+
+    methods: { 
+       
+      }
   }
 </script>
 

@@ -1,27 +1,22 @@
 <template>
   <BaseContainer>
     <div class="apartments-list">
-      <ApartmentsItem
-        v-for="{id, descr, rating, imgUrl, price} in items"
-        :key="id"
-        :descr="descr"
-        :rating="rating"
-        :imgSrc="imgUrl"
-        :price="price"
-      />
+      <slot name="title"></slot>
+      <template v-for="apartment in items">
+        <slot name="apartment" v-bind:apartment="apartment"></slot>
+      </template>
     </div>
   </BaseContainer>
 </template>
 
 <script>
 import BaseContainer from '../shared/BaseContainer.vue';
-import ApartmentsItem from './ApartmentsItem.vue';
+
 
   export default {
     name: 'ApartmentsList',
 
     components: {
-      ApartmentsItem,
       BaseContainer,
     },
 

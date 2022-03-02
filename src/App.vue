@@ -1,60 +1,59 @@
 <template>
-    <div>
-      <h2>{{ text }}</h2>
+  <div>
+    <h2>{{ text }}</h2>
 
-      <CustomInput v-model="text"/>
+    <CustomSelect :items="['name', 'label', 'salary']" />
+    <CustomInput :input="input" />
 
-      <ApartmentsList :items="apartmens">
+    <ApartmentsList :items="apartmens">
       <template v-slot:title></template>
-        <template v-slot:apartment="{apartment}">
-          <ApartmentsItem
-            v-bind:key="apartment.id"
-            v-bind:descr="apartment.descr"
-            v-bind:rating="apartment.rating"
-            v-bind:imgSrc="apartment.imgUrl"
-            v-bind:price="apartment.price"
-            v-on:click.enter="handleClick"
-          />
-        </template>
-      </ApartmentsList>
-    </div>
+      <template v-slot:apartment="{ apartment }">
+        <ApartmentsItem
+          :key="apartment.id"
+          :descr="apartment.descr"
+          :rating="apartment.rating"
+          :imgSrc="apartment.imgUrl"
+          :price="apartment.price"
+          @click.enter="handleClick"
+        />
+      </template>
+    </ApartmentsList>
+  </div>
 </template>
 
 <script>
-
 // import Button from './components/Button.vue'
 // import StarRating from './components/StarRating.vue';
 import ApartmentsList from './components/apartment/ApartmentsList.vue';
 import apartmens from './components/apartment/apartment';
 import ApartmentsItem from './components/apartment/ApartmentsItem.vue';
 import CustomInput from './components/shared/CustomInput.vue';
+import CustomSelect from './components/shared/CustomSelect.vue';
 
 export default {
   name: 'App',
-
   components: {
     ApartmentsList,
     ApartmentsItem,
     CustomInput,
+    CustomSelect,
   },
 
   data() {
     return {
-        apartmens,
-        text: "",
-      }
+      apartmens,
+      text: '',
+    };
   },
 
-  computed: {
-  
-  },
+  computed: {},
 
   methods: {
-    handleClick() {
-    
-    }
-  }
-}
+    input(e) {
+      this.text = e.target.value;
+    },
+  },
+};
 </script>
 
 <style>

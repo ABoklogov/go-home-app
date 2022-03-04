@@ -1,37 +1,29 @@
 <template>
-  <BaseContainer>
-    <div class="apartments-list">
-      <slot name="title"></slot>
-      <template v-for="apartment in items">
-        <slot name="apartment" v-bind:apartment="apartment"></slot>
-      </template>
-    </div>
-  </BaseContainer>
+  <div class="apartments-list">
+    <slot name="title"></slot>
+    <template v-for="apartment in items">
+      <slot name="apartment" :apartment="apartment"></slot>
+    </template>
+  </div>
 </template>
 
 <script>
-import BaseContainer from '../shared/BaseContainer.vue';
+export default {
+  name: 'ApartmentsList',
 
+  components: {},
 
-  export default {
-    name: 'ApartmentsList',
-
-    components: {
-      BaseContainer,
-    },
-
-    props: {
-      items: [],
-    }
-
-  }
+  props: {
+    items: [],
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-  .apartments-list {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: -15px;
-    margin-right: -15px;
+.apartments-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
 }
 </style>

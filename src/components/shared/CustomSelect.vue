@@ -1,6 +1,11 @@
 <template>
-  <select class="select" v-on="listeners">
-    <option v-for="item in formaredItems" :key="item.value" :value="item.value">
+  <select class="select" @change="changeCity">
+    <option
+      v-for="item in formaredItems"
+      :key="item.value"
+      :value="item.value"
+      :selected="item.selected"
+    >
       {{ item.label }}
     </option>
   </select>
@@ -15,15 +20,13 @@ export default {
       type: Array,
       requeired: true,
     },
+    changeCity: {
+      type: Function,
+      requeired: true,
+    },
   },
 
   computed: {
-    listeners() {
-      return {
-        ...this.listeners,
-        input: event => this.$emit('input', event.target.value),
-      };
-    },
     formaredItems() {
       return this.items.map(item =>
         typeof item === 'object' ? item : { value: item, label: item },
@@ -37,10 +40,15 @@ export default {
 @import '../../assets/scss/variables.scss';
 
 .select {
-  min-width: 220px;
-  min-height: 44px;
+  width: 220px;
+  height: 44px;
   background: #ffffff;
   border: 2px solid $main-color;
-  padding: 11px 20px;
+  padding: 9px 20px;
+
+  font-family: Montserrat;
+  font-size: 18px;
+  line-height: 21px;
+  color: #000000;
 }
 </style>

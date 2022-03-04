@@ -1,5 +1,5 @@
 <template>
-  <input class="input" type="text" @input="input" />
+  <input class="input" type="text" @input="input" :value="value" />
 </template>
 
 <script>
@@ -11,6 +11,10 @@ export default {
       type: Function,
       required: true,
     },
+    value: {
+      type: Number,
+      default: 0,
+    },
   },
 };
 </script>
@@ -19,8 +23,8 @@ export default {
 @import '../../assets/scss/variables.scss';
 
 .input {
-  min-height: 44px;
-  min-width: 349px;
+  width: 220px;
+  height: 44px;
   background: #ffffff;
   border: 2px solid $main-color;
 

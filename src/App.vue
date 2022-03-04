@@ -1,42 +1,40 @@
 <template>
   <div>
     <h2>{{ text }}</h2>
+    <BaseContainer>
+      <ApartmentFilterForm class="apartment-filter" @submit="logger" />
 
-    <CustomSelect :items="['name', 'label', 'salary']" />
-    <CustomInput :input="input" />
-
-    <ApartmentsList :items="apartmens">
-      <template v-slot:title></template>
-      <template v-slot:apartment="{ apartment }">
-        <ApartmentsItem
-          :key="apartment.id"
-          :descr="apartment.descr"
-          :rating="apartment.rating"
-          :imgSrc="apartment.imgUrl"
-          :price="apartment.price"
-          @click.enter="handleClick"
-        />
-      </template>
-    </ApartmentsList>
+      <ApartmentsList :items="apartmens">
+        <template v-slot:title></template>
+        <template v-slot:apartment="{ apartment }">
+          <ApartmentsItem
+            :key="apartment.id"
+            :descr="apartment.descr"
+            :rating="apartment.rating"
+            :imgSrc="apartment.imgUrl"
+            :price="apartment.price"
+            @click.enter="handleClick"
+          />
+        </template>
+      </ApartmentsList>
+    </BaseContainer>
   </div>
 </template>
 
 <script>
-// import Button from './components/Button.vue'
-// import StarRating from './components/StarRating.vue';
+import BaseContainer from './components/shared/BaseContainer.vue';
 import ApartmentsList from './components/apartment/ApartmentsList.vue';
 import apartmens from './components/apartment/apartment';
 import ApartmentsItem from './components/apartment/ApartmentsItem.vue';
-import CustomInput from './components/shared/CustomInput.vue';
-import CustomSelect from './components/shared/CustomSelect.vue';
+import ApartmentFilterForm from './components/apartment/ApartmentFilterForm.vue';
 
 export default {
   name: 'App',
   components: {
+    BaseContainer,
     ApartmentsList,
     ApartmentsItem,
-    CustomInput,
-    CustomSelect,
+    ApartmentFilterForm,
   },
 
   data() {
@@ -52,6 +50,9 @@ export default {
     input(e) {
       this.text = e.target.value;
     },
+    logger(value) {
+      console.log(value);
+    },
   },
 };
 </script>
@@ -64,5 +65,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.apartment-filter {
+  margin-bottom: 39px;
 }
 </style>

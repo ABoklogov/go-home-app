@@ -1,5 +1,5 @@
 <template>
-  <input class="input" type="text" @input="input" :value="value" />
+  <input class="input" type="text" @input="changePrice" :value="value" />
 </template>
 
 <script>
@@ -7,13 +7,13 @@ export default {
   name: 'CustomInput',
 
   props: {
-    input: {
+    changePrice: {
       type: Function,
       required: true,
     },
     value: {
-      type: Number,
-      default: 0,
+      type: String,
+      default: '',
     },
   },
 };

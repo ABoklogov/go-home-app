@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>{{ text }}</h2>
+    <!-- <h2>{{ text }}</h2> -->
     <BaseContainer>
       <ApartmentFilterForm class="apartment-filter" @submit="logger" />
 
@@ -40,16 +40,13 @@ export default {
   data() {
     return {
       apartmens,
-      text: '',
+      // text: '',
     };
   },
 
   computed: {},
 
   methods: {
-    input(e) {
-      this.text = e.target.value;
-    },
     logger(value) {
       console.log(value);
     },

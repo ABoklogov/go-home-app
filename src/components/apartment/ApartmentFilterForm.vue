@@ -6,7 +6,11 @@
         :changeCity="changeCity"
         class="form__select"
       />
-      <CustomInput :value="price" placeholder="Цена, от" />
+      <CustomInput
+        :value="price"
+        :changePrice="changePrice"
+        placeholder="Цена, от"
+      />
     </div>
 
     <SubmitButton class="form__submit" type="submit">
@@ -30,7 +34,7 @@ export default {
   data() {
     return {
       city: '',
-      price: 0,
+      price: '',
     };
   },
 
@@ -56,6 +60,9 @@ export default {
     },
     changeCity(e) {
       this.city = e.target.value;
+    },
+    changePrice(e) {
+      this.price = e.target.value;
     },
   },
 };

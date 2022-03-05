@@ -1,10 +1,9 @@
 <template>
   <div>
-    <!-- <h2>{{ text }}</h2> -->
     <BaseContainer>
-      <ApartmentFilterForm class="apartment-filter" @submit="logger" />
+      <ApartmentFilterForm class="apartment-filter" @submit="filter" />
 
-      <ApartmentsList :items="apartmens">
+      <ApartmentsList :items="filteredApartmens">
         <template v-slot:title></template>
         <template v-slot:apartment="{ apartment }">
           <ApartmentsItem
@@ -40,15 +39,41 @@ export default {
   data() {
     return {
       apartmens,
-      // text: '',
+      filters: {
+        city: '',
+        price: '',
+      },
     };
   },
 
-  computed: {},
+  computed: {
+    filteredApartmens() {
+      return this.filterByCityName(this.filterByPrice(this.apartmens));
+    },
+  },
 
   methods: {
-    logger(value) {
-      console.log(value);
+    filter(obj) {
+      this.filters.city = obj.city;
+      this.filters.price = obj.price;
+      console.log(obj);
+      // console.log(price);
+    },
+
+    filterByCityName(apartmens) {
+      if (!this.filters.city) return apartmens;
+      console.log(111);
+      return apartmens.filter(apartment => {
+        return apartment.location.city === this.filters.city;
+      });
+    },
+
+    filterByPrice(apartmens) {
+      if (!this.filters.price) return apartmens;
+      console.log(222);
+      return apartmens.filter(apartment => {
+        return apartment.price >= this.filters.price;
+      });
     },
   },
 };

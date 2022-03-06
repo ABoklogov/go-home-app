@@ -1,7 +1,7 @@
 <template>
   <div>
     <BaseContainer>
-      <ApartmentFilterForm class="apartment-filter" @submit="filter" />
+      <ApartmentFilterForm class="apartment-filter" @submitForm="filter" />
 
       <ApartmentsList :items="filteredApartmens">
         <template v-slot:title></template>
@@ -53,27 +53,25 @@ export default {
   },
 
   methods: {
-    filter(obj) {
-      this.filters.city = obj.city;
-      this.filters.price = obj.price;
-      console.log(obj);
-      // console.log(price);
+    filter({ city, price }) {
+      this.filters.city = city;
+      this.filters.price = price;
     },
 
     filterByCityName(apartmens) {
       if (!this.filters.city) return apartmens;
-      console.log(111);
-      return apartmens.filter(apartment => {
-        return apartment.location.city === this.filters.city;
-      });
+
+      return apartmens.filter(
+        apartment => apartment.location.city === this.filters.city,
+      );
     },
 
     filterByPrice(apartmens) {
       if (!this.filters.price) return apartmens;
-      console.log(222);
-      return apartmens.filter(apartment => {
-        return apartment.price >= this.filters.price;
-      });
+
+      return apartmens.filter(
+        apartment => apartment.price >= this.filters.price,
+      );
     },
   },
 };

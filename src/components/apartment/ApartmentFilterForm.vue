@@ -58,7 +58,7 @@ export default {
 
   methods: {
     handleSubmit() {
-      this.$emit('submit', { city: this.city, price: this.price });
+      this.$emit('submitForm', { city: this.city, price: this.price });
     },
     changeCity(e) {
       this.city = e.target.value;

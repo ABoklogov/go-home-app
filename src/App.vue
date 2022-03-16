@@ -64,25 +64,46 @@ export default {
   },
 
   methods: {
+<<<<<<< Updated upstream
     filter({ city, price }) {
       this.filters.city = city;
       this.filters.price = price;
+=======
+    filter(obj) {
+      this.filters.city = obj.city;
+      this.filters.price = obj.price;
+      console.log(obj);
+>>>>>>> Stashed changes
     },
 
     filterByCityName(apartmens) {
       if (!this.filters.city) return apartmens;
+<<<<<<< Updated upstream
 
       return apartmens.filter(
         apartment => apartment.location.city === this.filters.city,
       );
+=======
+      
+      return apartmens.filter(apartment => {
+        return apartment.location.city === this.filters.city;
+      });
+>>>>>>> Stashed changes
     },
 
     filterByPrice(apartmens) {
       if (!this.filters.price) return apartmens;
+<<<<<<< Updated upstream
 
       return apartmens.filter(
         apartment => apartment.price >= this.filters.price,
       );
+=======
+      
+      return apartmens.filter(apartment => {
+        return apartment.price >= this.filters.price;
+      });
+>>>>>>> Stashed changes
     },
   },
 };

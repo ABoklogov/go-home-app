@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div class="content">
+      <AppHeader/>
       <BaseContainer>
         <ApartmentFilterForm class="apartment-filter" @submitForm="filter" />
 
@@ -33,6 +34,7 @@ import apartmens from './components/apartment/apartment';
 import ApartmentsItem from './components/apartment/ApartmentsItem.vue';
 import ApartmentFilterForm from './components/apartment/ApartmentFilterForm.vue';
 import AppFooter from './components/shared/Footer.vue';
+import AppHeader from './components/shared/Header.vue';
 
 export default {
   name: 'App',
@@ -42,6 +44,7 @@ export default {
     ApartmentsItem,
     ApartmentFilterForm,
     AppFooter,
+    AppHeader,
   },
 
   data() {
@@ -97,6 +100,7 @@ export default {
 
 .apartment-filter {
   margin-bottom: 39px;
+  padding-top: 120px;
 }
 
 .content{

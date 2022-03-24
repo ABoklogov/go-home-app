@@ -7,7 +7,7 @@
       </div>
     </div>
 </template>
-
+111
 <script>
     export default {
         name: "StarRating",

@@ -1,13 +1,13 @@
 <template>
     <div class="star-rating">
       <span v-for="index in starLimit" :key="index" class="star star--outlined"></span>
-
+      <p></p>
       <div class="star-rating__colored" :style="ratingWidthStyle">
          <span v-for="index in starLimit" :key="index" class="star star--colored"></span>
       </div>
     </div>
 </template>
-111
+
 <script>
     export default {
         name: "StarRating",

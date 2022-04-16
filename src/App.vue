@@ -5,6 +5,7 @@
       <BaseContainer>
         <ApartmentFilterForm class="apartment-filter" @submitForm="filter" />
 
+      <router-view></router-view>
         <p v-if="!filteredApartmens.length">Ничего не найдено</p>
 
         <ApartmentsList v-else :items="filteredApartmens">
@@ -14,7 +15,7 @@
               :key="apartment.id"
               :descr="apartment.descr"
               :rating="apartment.rating"
-              :imgSrc="apartment.imgUrl"
+              :src="apartment.imgUrl"
               :price="apartment.price"
               @click.enter="handleClick"
             />

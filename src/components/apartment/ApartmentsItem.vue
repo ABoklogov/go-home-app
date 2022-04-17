@@ -9,7 +9,10 @@
         <div class="apartments-item__rating">
           <StarRating v-bind:rating="rating" />
         </div>
-        <div class="apartments-item__price">UAH {{ price }} за ночь</div>
+        <div class="apartments-item__price">UAH 
+          {{ price }} за ночь
+        </div>
+        <router-link :to="{ name: 'apartment', params: { id }, query: { name: 'fuck' } }" class="apartments-item__link"></router-link>
       </div>
     </div>
   </div>
@@ -26,6 +29,10 @@ export default {
   },
 
   props: {
+    id: {
+      type: String,
+      required: true,
+    },
     descr: {
       type: String,
       default: '',

@@ -1,9 +1,16 @@
 <template>
   <main class="apartment-page">
     <BaseContainer>
-      <ApartmentsMainInfo
-      :apartments="findApartment"/>
-      <!-- <ApartmentsOwner/> -->
+    <div class="apartment-page__content">
+      <ApartmentsMainInfo :apartment="apartment"/>
+
+      <div class="apartment-page__additional-info">
+        <ApartmentsOwner
+          class="apartment-page__owner"
+          :owner="apartment.owner"
+        />
+      </div>
+    </div>
     </BaseContainer>
   </main>
 </template>
@@ -11,7 +18,7 @@
 <script>
 import BaseContainer from '../components/shared/BaseContainer.vue';
 import ApartmentsMainInfo from '../components/apartment/ApartmentsMainInfo.vue';
-// import ApartmentsOwner from '../components/apartment/ApartmentsMainInfo.vue';
+import ApartmentsOwner from '../components/apartment/ApartmentsOwner.vue';
 import apartments from '../components/apartment/apartments';
 
 
@@ -20,10 +27,10 @@ import apartments from '../components/apartment/apartments';
     components: {
       BaseContainer,
       ApartmentsMainInfo,
-      // ApartmentsOwner,
+      ApartmentsOwner,
     },  
     computed: {
-      findApartment() {
+      apartment() {
       return apartments.find(apartment => apartment.id === this.$route.params.id)
       },
     },
@@ -32,6 +39,16 @@ import apartments from '../components/apartment/apartments';
 
 <style lang="scss" scoped>
 .apartment-page {
-  padding-bottom: 72px;
+  padding-bottom: 55px;
+  &__content {
+    display: flex;
+    align-items: flex-start;
+  }
+  &__additional-info {
+    margin-left: 30px;
+    max-width: 350px;
+    flex-grow: 0;
+    flex-shrink: 1;
+  }
 }
 </style>

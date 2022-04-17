@@ -22,7 +22,7 @@
 <script>
 import CustomSelect from '../shared/CustomSelect.vue';
 import CustomInput from '../shared/CustomInput.vue';
-import SubmitButton from '../MyButton.vue';
+import SubmitButton from '../shared/MyButton.vue';
 
 export default {
   name: 'ApartmentsFilterForm',

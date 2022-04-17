@@ -1,15 +1,14 @@
 <template>
   <article class="apartment-main-info">
     <div class="apartment-main-info__heading">
-      <h1 class="apartment-main-info__title">
-      
-        {{apartments.title}}
-      </h1>
-      <StarRating :rating="apartments.rating"/>
+      <h2 class="apartment-main-info__title">
+        {{apartment.title}}
+      </h2>
+      <StarRating :rating="apartment.rating"/>
     </div>
-    <img :src="require(`@/assets${apartments.imgUrl}`)" alt="" class="apartment-main-info__photo" width="730">
+    <img :src="require(`@/assets${apartment.imgUrl}`)" alt="" class="apartment-main-info__photo" width="730">
     <p class="apartment-main-info__description">
-      {{apartments.descr}}
+      {{apartment.descr}}
     </p>
   </article>
 </template>
@@ -23,7 +22,7 @@ import StarRating from '../StarRating.vue';
       StarRating,
     },
     props: {
-      apartments: {
+      apartment: {
         type: Object,
         required: true,
       }
@@ -33,6 +32,7 @@ import StarRating from '../StarRating.vue';
 
 <style lang="scss" scoped>
 .apartment-main-info {
+  max-width: 730px;
   &__heading {
     display: flex;
   }

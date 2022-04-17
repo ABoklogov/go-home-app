@@ -1,6 +1,6 @@
 <template>
     <router-link :to="{ name: 'home' }">
-        <img src="../../assets/icons/logo.svg" alt="logo">
+        <img src="../assets/icons/logo.svg" alt="logo">
     </router-link>
 </template>
 
@@ -10,6 +10,3 @@
     }
 </script>
 
-<style lang="scss" scoped>
-
-</style>

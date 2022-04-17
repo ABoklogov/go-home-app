@@ -1,7 +1,7 @@
 <template>
   <div class="apartments-item">
     <div class="apartments-item__inner">
-      <img :src="require(`../../assets${src}`)"  class="apartments-item__photo" />
+      <img :src="require(`@/assets${src}`)"  class="apartments-item__photo" />
       <div class="apartments-item__content">
         <p class="apartments-item__description">
           {{ descr }}

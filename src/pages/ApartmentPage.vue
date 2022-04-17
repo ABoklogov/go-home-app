@@ -1,28 +1,37 @@
 <template>
-  <div class="apartment-page">
+  <main class="apartment-page">
     <BaseContainer>
-      <h1>Apartment Page</h1>
+      <ApartmentsMainInfo
+      :apartments="findApartment"/>
+      <!-- <ApartmentsOwner/> -->
     </BaseContainer>
-  </div>
+  </main>
 </template>
 
 <script>
 import BaseContainer from '../components/shared/BaseContainer.vue';
+import ApartmentsMainInfo from '../components/apartment/ApartmentsMainInfo.vue';
+// import ApartmentsOwner from '../components/apartment/ApartmentsMainInfo.vue';
+import apartments from '../components/apartment/apartments';
+
 
   export default {
     name: 'ApartmentPage',
     components: {
       BaseContainer,
+      ApartmentsMainInfo,
+      // ApartmentsOwner,
     },  
-    mounted() {
-      console.log(this.$router);
-      console.log(this.$route);
-    }
+    computed: {
+      findApartment() {
+      return apartments.find(apartment => apartment.id === this.$route.params.id)
+      },
+    },
   }
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  margin-top: 100px;
+.apartment-page {
+  padding-bottom: 72px;
 }
 </style>

@@ -25,7 +25,7 @@ import CustomInput from '../shared/CustomInput.vue';
 import SubmitButton from '../MyButton.vue';
 
 export default {
-  name: 'ApartmentFilterForm',
+  name: 'ApartmentsFilterForm',
 
   components: {
     CustomSelect,

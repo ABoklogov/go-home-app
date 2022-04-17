@@ -1,7 +1,7 @@
 <template>
   <main class="home-page">
     <BaseContainer>
-      <ApartmentFilterForm class="apartment-filter" @submitForm="filter" />
+      <ApartmentsFilterForm class="apartment-filter" @submitForm="filter" />
 
       <p v-if="!filteredApartmens.length">
         Ничего не найдено
@@ -27,9 +27,9 @@
 <script>
 import BaseContainer from '../components/shared/BaseContainer.vue';
 import ApartmentsList from '../components/apartment/ApartmentsList.vue';
-import apartmens from '../components/apartment/apartment';
+import apartments from '../components/apartment/apartments.js';
 import ApartmentsItem from '../components/apartment/ApartmentsItem.vue';
-import ApartmentFilterForm from '../components/apartment/ApartmentFilterForm.vue';
+import ApartmentsFilterForm from '../components/apartment/ApartmentsFilterForm.vue';
 
 export default {
   name: 'HomePage',
@@ -37,13 +37,13 @@ export default {
     BaseContainer,
     ApartmentsList,
     ApartmentsItem,
-    ApartmentFilterForm,
+    ApartmentsFilterForm,
   
   },
 
   data() {
     return {
-      apartmens,
+      apartments,
       filters: {
         city: '',
         price: '',
@@ -53,7 +53,7 @@ export default {
 
   computed: {
     filteredApartmens() {
-      return this.filterByCityName(this.filterByPrice(this.apartmens));
+      return this.filterByCityName(this.filterByPrice(this.apartments));
     },
   },
 
@@ -63,17 +63,17 @@ export default {
       this.filters.price = price;
     },
 
-    filterByCityName(apartmens) {
-      if (!this.filters.city) return apartmens;
+    filterByCityName(apartments) {
+      if (!this.filters.city) return apartments;
 
-      return apartmens.filter(
+      return apartments.filter(
         apartment => apartment.location.city === this.filters.city,
       );
     },
 
-    filterByPrice(apartmens) {
-      if (!this.filters.price) return apartmens;
-      return apartmens.filter(
+    filterByPrice(apartments) {
+      if (!this.filters.price) return apartments;
+      return apartments.filter(
         apartment => apartment.price >= this.filters.price,
       );
     },
@@ -84,6 +84,6 @@ export default {
 <style>
 .apartment-filter {
   margin-bottom: 39px;
-  padding-top: 120px;
+  /* padding-top: 120px; */
 }
 </style>

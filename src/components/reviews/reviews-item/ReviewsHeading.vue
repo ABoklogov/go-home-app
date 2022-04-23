@@ -1,6 +1,6 @@
 <template>
   <div class="reviews-heading">
-    <ReviewsAvatar/>
+    <ReviewsAvatar class="reviews-heading__avatar"/>
     <div class="reviews-heading__content">
       <span class="reviews-heading__author">{{ author }}</span>
       <StarRating :rating="rating"/>
@@ -32,5 +32,20 @@ import ReviewsAvatar from './ReviewsAvatar.vue';
 </script>
 
 <style lang="scss" scoped>
-
+.reviews-heading {
+  display: flex;
+  align-items: center;
+  &__avatar {
+    margin-right: 18px;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+  &__author {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
 </style>

@@ -9,12 +9,16 @@
     </div>
 
     <ReviewsItem 
-      v-for="review in reviews" 
+      v-for="review in currentReviews" 
       :key="review.author" 
       :review="review"
     />
 
-    <button class="reviews__show-more">Читать еще...</button>
+    <button 
+      class="reviews__show-more" 
+      @click="toggleReviews">
+      {{ buttonText }}
+    </button>
   </section>
 </template>
 
@@ -34,6 +38,11 @@ import StarRating from '../StarRating.vue';
         required: true
       }
     },
+    data() {
+      return {
+        limitReviews: 2,
+      }
+    },
     computed: {
       mountOfReviews() {
         return this.reviews.length;
@@ -41,6 +50,19 @@ import StarRating from '../StarRating.vue';
       totalRating() {
         const total = this.reviews.reduce((acc, el) => acc + el.rating, 0);
         return total / this.mountOfReviews;
+      },
+      currentReviews() {
+        return this.reviews.slice(0, this.limitReviews);
+      },
+      buttonText() {
+      return  this.limitReviews === this.reviews.length  ? 'Свернуть' : 'Читать еще...';
+      },
+    },
+    methods: {
+      toggleReviews() {
+        if (this.limitReviews !== this.reviews.length) {
+          this.limitReviews = this.reviews.length
+        } else {this.limitReviews = 2}
       },
     }
   }

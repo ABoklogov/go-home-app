@@ -1,7 +1,7 @@
 <template>
   <main class="apartment-page">
     <BaseContainer>
-    <div class="apartment-page__content">
+    <div v-if="apartment" class="apartment-page__content">
       <ApartmentsMainInfo :apartment="apartment"/>
 
       <div class="apartment-page__additional-info">
@@ -20,9 +20,9 @@
 import BaseContainer from '../components/shared/BaseContainer.vue';
 import ApartmentsMainInfo from '../components/apartment/ApartmentsMainInfo.vue';
 import ApartmentsOwner from '../components/apartment/ApartmentsOwner.vue';
-import apartments from '../components/apartment/apartments';
 import ReviewsSection from '../components/reviews/index.vue';
 import reviewsList from '../components/reviews/reviews.json';
+import {getApartmentById} from '@/services/apartment.services';
 
   export default {
     name: 'ApartmentPage',
@@ -32,12 +32,23 @@ import reviewsList from '../components/reviews/reviews.json';
       ApartmentsOwner,
       ReviewsSection,
     },  
+    data() {
+      return {
+        apartment: null,
+      }
+    },
+    async created() {
+      const {id} = this.$route.params;
+      try {
+        const {data} = await getApartmentById(id);
+        this.apartment = data;
+      } catch (error) {
+        console.error(error); 
+      }
+    },
     computed: {
       reviewsList() {
         return reviewsList
-      },
-      apartment() {
-      return apartments.find(apartment => apartment.id === this.$route.params.id)
       },
     },
   }

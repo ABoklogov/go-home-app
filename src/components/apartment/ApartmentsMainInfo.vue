@@ -6,7 +6,7 @@
       </h2>
       <StarRating :rating="apartment.rating"/>
     </div>
-    <img :src="require(`@/assets${apartment.imgUrl}`)" alt="" class="apartment-main-info__photo" width="730">
+    <img :src="apartment.imgUrl" alt="apartment" class="apartment-main-info__photo" width="730">
     <p class="apartment-main-info__description">
       {{apartment.descr}}
     </p>

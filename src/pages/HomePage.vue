@@ -27,9 +27,9 @@
 <script>
 import BaseContainer from '../components/shared/BaseContainer.vue';
 import ApartmentsList from '../components/apartment/ApartmentsList.vue';
-import apartments from '../components/apartment/apartments.js';
 import ApartmentsItem from '../components/apartment/ApartmentsItem.vue';
 import ApartmentsFilterForm from '../components/apartment/ApartmentsFilterForm.vue';
+import { getApartmentsList } from '@/services/apartment.services';
 
 export default {
   name: 'HomePage',
@@ -40,17 +40,23 @@ export default {
     ApartmentsFilterForm,
   
   },
-
   data() {
     return {
-      apartments,
+      apartments: [],
       filters: {
         city: '',
         price: '',
       },
     };
   },
-
+  async created() {
+    try {
+     const {data} = await getApartmentsList();
+     this.apartments = data;
+    } catch (error) {
+      console.error(error)
+    }
+  },
   computed: {
     filteredApartmens() {
       return this.filterByCityName(this.filterByPrice(this.apartments));

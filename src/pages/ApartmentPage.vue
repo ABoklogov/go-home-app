@@ -57,6 +57,7 @@ import {getApartmentById} from '@/services/apartment.services';
 <style lang="scss" scoped>
 .apartment-page {
   padding-bottom: 55px;
+  padding-top: 120px;
   &__content {
     display: flex;
     align-items: flex-start;

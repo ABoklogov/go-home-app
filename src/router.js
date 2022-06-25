@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Apartment from './pages/ApartmentPage.vue';
+import ApartmentPage from './pages/ApartmentPage.vue';
 import HomePage from './pages/HomePage.vue';
 import ErrorPage from './pages/ErrorPage.vue';
 
@@ -11,7 +11,7 @@ const routes = [
   },
   {
     path: '/apartments/:id',
-    component: Apartment,
+    component: ApartmentPage,
     name: 'apartment',
   },
   {

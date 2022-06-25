@@ -1,19 +1,19 @@
 <template>
   <header class="header">
-    <!-- <BaseContainer> -->
+    <BaseContainer>
       <Logo/>
-    <!-- </BaseContainer> -->
+    </BaseContainer>
   </header>
 </template>
 
 <script>
-// import BaseContainer from './BaseContainer.vue';
+import BaseContainer from './shared/BaseContainer.vue';
 import Logo from './Logo.vue';
 
   export default {
     name: "AppHeader",
     components: {
-      // BaseContainer,
+      BaseContainer,
       Logo,
     }
   }

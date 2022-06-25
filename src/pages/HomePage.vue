@@ -90,6 +90,6 @@ export default {
 <style>
 .apartment-filter {
   margin-bottom: 39px;
-  /* padding-top: 120px; */
+  padding-top: 120px;
 }
 </style>

@@ -9,7 +9,10 @@
       <CustomInput
         :value="price"
         :changePrice="changePrice"
+        :errorMessage="'Не должно быть пустым'"
+        :rules="[(val) => val]"
         placeholder="Цена, от"
+        type="number" 
       />
     </div>
 

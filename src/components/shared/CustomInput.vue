@@ -1,13 +1,6 @@
 <template>
   <div class="wrapper-input">
-    <input 
-      class="custom-input" 
-      :class="!isValid && 'custom-input--error'" 
-      @input="changePrice"
-      v-on="listeners" 
-      v-bind="$attrs"
-      :value="value"
-    />
+    <input class="custom-input" :class="!isValid && 'custom-input--error'" @input="changeValue" v-bind="$attrs" :value="value" />
     <span v-if="!isValid" class="custom-input__error">{{ error }}</span>
   </div>
 </template>
@@ -18,12 +11,13 @@ export default {
   data() {
     return {
       isValid: true,
-      error: ''
+      error: '',
     }
   },
+  inject: ['form'],
   inheritAttrs: false,
   props: {
-    changePrice: {
+    changeValue: {
       type: Function,
       required: true,
     },
@@ -40,25 +34,35 @@ export default {
       default: () => [],
     }
   },
-  computed: {
-    // слушатели на инпут
-    listeners() {
-       return {
-        input: (event) => this.$emit('input', event.target.value),
-      };
-    },
+  //при маунте регистрируем инпут в компоненте формы CustomForm
+  mounted() {
+    if (!this.form) return;
+    this.form.registerInput(this);
+  },
+  //при размонтировании компонента удаляем инпут из компонента CustomForm
+  beforeUnmount() {
+    if (!this.form) return;
+    this.form.unRegisterInput(this);
   },
   //следим за вводом данных в инпут и проводим валидацию
   watch: {
-    value(value) {
-      this.validate(value);
+    value() {
+      this.validate();
     }
+  },
+  computed: {
+    // слушатели на инпут
+    // listeners() {
+    //   return {
+    //     input: (event) => this.$emit('input', event.target.value),
+    //   };
+    // },
   },
   methods: {
     //метод валидации входных данных
-    validate(value) {
+    validate() {
       this.isValid = this.rules.every(rule => {
-        const { hasPassed, message } = rule(value);
+        const { hasPassed, message } = rule(this.value);
 
         if (!hasPassed) {
           this.error = message || this.errorMessage
@@ -66,7 +70,11 @@ export default {
 
         return hasPassed
       });
-    }
+    },
+    // метод обнуления инпута
+    reset() {
+      this.$emit('input', '');
+    },
   }
 };
 </script>
@@ -94,6 +102,7 @@ export default {
   position: relative;
   display: inline-flex;
 }
+
 .custom-input {
   height: 40px;
   width: 100%;
@@ -102,12 +111,15 @@ export default {
   outline: none;
   line-height: inherit;
   padding: 8px 15px;
+
   &::placeholder {
     color: inherit;
   }
+
   &--error {
     border-color: red;
   }
+
   &__error {
     position: absolute;
     top: 100%;

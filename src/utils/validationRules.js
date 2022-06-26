@@ -7,3 +7,8 @@ export const charLimit = (limit) => (val) => ({
   hasPassed: val.length <= limit,
   message: "Вы превысили лимит"
 });
+
+export const numberCheck = (val) => ({
+  hasPassed: !isNaN(val),
+  message: "Введите корректное число"
+});

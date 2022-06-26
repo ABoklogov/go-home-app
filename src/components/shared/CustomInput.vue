@@ -3,11 +3,12 @@
     <input 
       class="custom-input" 
       :class="!isValid && 'custom-input--error'" 
-      @input="changePrice" 
-      :value="value" 
+      @input="changePrice"
+      v-on="listeners" 
       v-bind="$attrs"
+      :value="value"
     />
-    <span v-if="!isValid" class="custom-input__error">{{ errorMessage }}</span>
+    <span v-if="!isValid" class="custom-input__error">{{ error }}</span>
   </div>
 </template>
 
@@ -17,14 +18,11 @@ export default {
   data() {
     return {
       isValid: true,
+      error: ''
     }
   },
   inheritAttrs: false,
   props: {
-    // placeholder: {
-    //   type: String,
-    //   default: '',
-    // },
     changePrice: {
       type: Function,
       required: true,
@@ -42,15 +40,32 @@ export default {
       default: () => [],
     }
   },
+  computed: {
+    // слушатели на инпут
+    listeners() {
+       return {
+        input: (event) => this.$emit('input', event.target.value),
+      };
+    },
+  },
+  //следим за вводом данных в инпут и проводим валидацию
   watch: {
     value(value) {
       this.validate(value);
-      console.log(value);
     }
   },
   methods: {
+    //метод валидации входных данных
     validate(value) {
-      this.isValid = this.rules.every(rule => rule(value));
+      this.isValid = this.rules.every(rule => {
+        const { hasPassed, message } = rule(value);
+
+        if (!hasPassed) {
+          this.error = message || this.errorMessage
+        }
+
+        return hasPassed
+      });
     }
   }
 };

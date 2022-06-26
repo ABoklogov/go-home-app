@@ -10,9 +10,9 @@
         :value="price"
         :changePrice="changePrice"
         :errorMessage="'Не должно быть пустым'"
-        :rules="[(val) => val]"
+        :rules="rules"
         placeholder="Цена, от"
-        type="number" 
+         
       />
     </div>
 
@@ -26,6 +26,7 @@
 import CustomSelect from '../shared/CustomSelect.vue';
 import CustomInput from '../shared/CustomInput.vue';
 import SubmitButton from '../shared/MyButton.vue';
+import { isRequered, charLimit } from '../../utils/validationRules.js';
 
 export default {
   name: 'ApartmentsFilterForm',
@@ -35,15 +36,17 @@ export default {
     CustomInput,
     SubmitButton,
   },
-
   data() {
     return {
       city: '',
       price: '',
     };
   },
-
   computed: {
+    // набор правил для компонента CustomInput
+    rules() {
+      return [isRequered, charLimit(10)];
+    },
     sities() {
       return [
         { value: '', label: 'Город', selected: true },

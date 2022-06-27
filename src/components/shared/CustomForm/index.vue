@@ -1,5 +1,5 @@
 <template>
-  <form class="form" v-on="listeners">
+  <form class="form">
     <slot></slot>
   </form>
 </template>
@@ -28,7 +28,11 @@ export default {
     },
     // метод валидации всех инпутов в форме
     validate() {
-      return this.inputs.every(input => input.validate());
+      return this.inputs.reduce((isValid, input) => {
+        const isInputValid = input.validate()
+
+        return isValid && isInputValid
+      }, true);
     },
     // метод обнуления всех инпутов в форме
     reset() {

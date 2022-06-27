@@ -14,7 +14,11 @@ export default {
       error: '',
     }
   },
-  inject: ['form'],
+  inject: {
+    form: {
+      default: null,
+    }
+  },
   inheritAttrs: false,
   props: {
     changeValue: {
@@ -51,17 +55,12 @@ export default {
     }
   },
   computed: {
-    // слушатели на инпут
-    // listeners() {
-    //   return {
-    //     input: (event) => this.$emit('input', event.target.value),
-    //   };
-    // },
+
   },
   methods: {
     //метод валидации входных данных
     validate() {
-      this.isValid = this.rules.every(rule => {
+      return this.isValid = this.rules.every(rule => {
         const { hasPassed, message } = rule(this.value);
 
         if (!hasPassed) {

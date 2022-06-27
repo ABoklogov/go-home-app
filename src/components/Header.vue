@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <BaseContainer>
-      <Logo/>
+      <Logo />
     </BaseContainer>
   </header>
 </template>
@@ -10,25 +10,26 @@
 import BaseContainer from './shared/BaseContainer.vue';
 import Logo from './Logo.vue';
 
-  export default {
-    name: "AppHeader",
-    components: {
-      BaseContainer,
-      Logo,
-    }
+export default {
+  name: "AppHeader",
+  components: {
+    BaseContainer,
+    Logo,
   }
+}
 </script>
 
 <style lang="scss" scoped>
 @import '../assets/scss/variables.scss';
 
-    .header {
-        padding: 16px 0;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background-color: $secondary-color;
-        height: 60px;
-    }
+.header {
+  padding: 16px 0;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: $secondary-color;
+  height: 60px;
+}
 </style>

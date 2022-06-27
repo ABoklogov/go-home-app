@@ -2,8 +2,8 @@
   <form class="form" @submit.prevent="handleSubmit">
     <div class="form-left-box">
       <CustomSelect :items="sities" :changeCity="changeCity" class="form__select" />
-      <CustomInput :value="price" :changeValue="changePrice" :errorMessage="'Не должно быть пустым'" :rules="rules"
-        placeholder="Цена, от" />
+      <CustomInput :value="price" :changeValue="changePrice" :errorMessage="'Не должно быть пустым'" :rules="rules" placeholder="Цена, от"
+        v-model="price" />
     </div>
 
     <SubmitButton class="form__submit" type="submit">

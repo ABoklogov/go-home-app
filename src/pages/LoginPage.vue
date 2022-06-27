@@ -1,19 +1,19 @@
 <template>
   <main class="login-page">
-    <BaseContainer>
+    <AuthSection>
       <LoginForm />
-    </BaseContainer>
+    </AuthSection>
   </main>
 </template>
 
 <script>
-import BaseContainer from '../components/shared/BaseContainer.vue';
-import LoginForm from '../components/LoginForm';
+import AuthSection from '../components/auth/AuthSection.vue';
+import LoginForm from '../components/auth/LoginForm';
 
 export default {
   name: 'LoginPage',
   components: {
-    BaseContainer,
+    AuthSection,
     LoginForm,
   }
 }

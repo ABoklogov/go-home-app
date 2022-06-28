@@ -54,9 +54,6 @@ export default {
       this.validate();
     }
   },
-  computed: {
-
-  },
   methods: {
     //метод валидации входных данных
     validate() {
@@ -81,25 +78,8 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/scss/variables.scss';
 
-// .input {
-//   width: 220px;
-//   height: 44px;
-//   background: #ffffff;
-//   border: 2px solid $main-color;
-
-//   font-family: Montserrat;
-//   font-style: normal;
-//   font-weight: 500;
-//   font-size: 18px;
-//   line-height: 22px;
-//   text-align: left;
-//   color: #000000;
-//   padding: 10px 32px;
-// }
-
 .wrapper-input {
   position: relative;
-  display: inline-flex;
 }
 
 .custom-input {

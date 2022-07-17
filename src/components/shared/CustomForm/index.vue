@@ -10,12 +10,12 @@ export default {
   provide() {
     return {
       form: this,
-    }
+    };
   },
   data() {
     return {
       inputs: [],
-    }
+    };
   },
   methods: {
     //метод регистрации инпута в форме
@@ -29,17 +29,17 @@ export default {
     // метод валидации всех инпутов в форме
     validate() {
       return this.inputs.reduce((isValid, input) => {
-        const isInputValid = input.validate()
+        const isInputValid = input.validate();
 
-        return isValid && isInputValid
+        return isValid && isInputValid;
       }, true);
     },
     // метод обнуления всех инпутов в форме
     reset() {
       this.inputs.forEach(input => input.reset());
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

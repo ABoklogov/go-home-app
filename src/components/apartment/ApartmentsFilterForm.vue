@@ -1,9 +1,19 @@
 <template>
   <form class="form" @submit.prevent="handleSubmit">
     <div class="form-left-box">
-      <CustomSelect :items="sities" :changeCity="changeCity" class="form__select" />
-      <CustomInput :value="price" :changeValue="changePrice" :errorMessage="'Не должно быть пустым'" :rules="rules" placeholder="Цена, от"
-        v-model="price" />
+      <CustomSelect
+        :items="sities"
+        :changeCity="changeCity"
+        class="form__select"
+      />
+      <CustomInput
+        :value="price"
+        :changeValue="changePrice"
+        :errorMessage="'Не должно быть пустым'"
+        :rules="rules"
+        placeholder="Цена, от"
+        v-model="price"
+      />
     </div>
 
     <SubmitButton class="form__submit" type="submit">
@@ -16,7 +26,11 @@
 import CustomSelect from '../shared/CustomSelect.vue';
 import CustomInput from '../shared/CustomInput.vue';
 import SubmitButton from '../shared/MyButton.vue';
-import { isRequered, charLimit, numberCheck } from '../../utils/validationRules.js';
+import {
+  isRequered,
+  charLimit,
+  numberCheck,
+} from '../../utils/validationRules.js';
 
 export default {
   name: 'ApartmentsFilterForm',
@@ -77,7 +91,6 @@ export default {
 
   &__submit {
     width: 220px;
-    border: none;
     font-family: Montserrat;
     font-size: 18px;
     line-height: 21px;

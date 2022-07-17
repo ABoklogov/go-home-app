@@ -1,6 +1,12 @@
 <template>
   <div class="wrapper-input">
-    <input class="custom-input" :class="!isValid && 'custom-input--error'" @input="changeValue" v-bind="$attrs" :value="value" />
+    <input
+      class="custom-input"
+      :class="!isValid && 'custom-input--error'"
+      @input="changeValue"
+      v-bind="$attrs"
+      :value="value"
+    />
     <span v-if="!isValid" class="custom-input__error">{{ error }}</span>
   </div>
 </template>
@@ -12,12 +18,12 @@ export default {
     return {
       isValid: true,
       error: '',
-    }
+    };
   },
   inject: {
     form: {
       default: null,
-    }
+    },
   },
   inheritAttrs: false,
   props: {
@@ -36,7 +42,7 @@ export default {
     rules: {
       type: Array,
       default: () => [],
-    }
+    },
   },
   //при маунте регистрируем инпут в компоненте формы CustomForm
   mounted() {
@@ -52,26 +58,26 @@ export default {
   watch: {
     value() {
       this.validate();
-    }
+    },
   },
   methods: {
     //метод валидации входных данных
     validate() {
-      return this.isValid = this.rules.every(rule => {
+      return (this.isValid = this.rules.every(rule => {
         const { hasPassed, message } = rule(this.value);
 
         if (!hasPassed) {
-          this.error = message || this.errorMessage
+          this.error = message || this.errorMessage;
         }
 
-        return hasPassed
-      });
+        return hasPassed;
+      }));
     },
     // метод обнуления инпута
     reset() {
       this.$emit('input', '');
     },
-  }
+  },
 };
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <button :type="type" :class="{ btn: true, 'btn--outlined': outlined }">
+  <button :type="type" class="btn" :class="{ 'btn--outlined': outlined }">
     <slot></slot>
   </button>
 </template>
@@ -23,13 +23,23 @@ export default {
 
 <style lang="scss" scoped>
 .btn {
-  width: 349px;
-  height: 49px;
+  position: relative;
+  display: inline-block;
+  font-family: Montserrat, sans-serif;
+  font-size: 18px;
   background: #ff662d;
-  border: 1px solid #000000;
-  box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: #fff;
+  min-width: 220px;
+  border: 1px solid transparent;
+  padding: 8px 15px;
   cursor: pointer;
+  transition: background-color 0.4s, color 0.4s;
+
+  &:hover {
+    background: #fff;
+    color: #ff662d;
+    border: 1px solid #ff662d;
+  }
 
   &--outlined {
     background: #fff;

@@ -3,12 +3,28 @@
     <CustomTitle class="login__title">Логин</CustomTitle>
     <CustomForm ref="form" @submit.prevent="handleSubmit" class="login-form">
       <div class="login__input">
-        <CustomInput name="email" :value="formData.email" :changeValue="changeEmail" :rules="emailRules" />
+        <CustomInput
+          name="email"
+          type="email"
+          :value="formData.email"
+          :changeValue="changeEmail"
+          :rules="emailRules"
+          class="login__input"
+          placeholder="Email"
+        />
       </div>
 
-      <CustomInput name="password" :value="formData.password" :changeValue="changePassword" :rules="passwordRules" class="login__input" />
+      <CustomInput
+        name="password"
+        type="password"
+        :value="formData.password"
+        :changeValue="changePassword"
+        :rules="passwordRules"
+        class="login__input"
+        placeholder="Password"
+      />
 
-      <MyButton type="submit" class="login__btn">Click Me</MyButton>
+      <MyButton type="submit" class="login__btn"> Вход </MyButton>
     </CustomForm>
   </AuthContainer>
 </template>
@@ -19,7 +35,12 @@ import CustomInput from '../../shared/CustomInput.vue';
 import MyButton from '../../shared/MyButton.vue';
 import AuthContainer from '../../auth/AuthContainer.vue';
 import CustomTitle from '../../shared/CustomTitle.vue';
-import { emailValidation, passwordValidation, isRequered } from '../../../utils/validationRules';
+import {
+  emailValidation,
+  passwordValidation,
+  isRequered,
+} from '../../../utils/validationRules';
+import { loginUser } from '../../../services/auth.services';
 
 export default {
   name: 'LoginForm',
@@ -35,8 +56,8 @@ export default {
       formData: {
         email: '',
         password: '',
-      }
-    }
+      },
+    };
   },
   computed: {
     rules() {
@@ -51,13 +72,20 @@ export default {
     },
     passwordRules() {
       return [this.rules.isRequered];
-    }
+    },
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
       const isFormValid = this.$refs.form.validate();
 
-      if (isFormValid) console.log(this.formData);
+      if (isFormValid) {
+        try {
+          const data = await loginUser(this.formData);
+          console.log('🚀 ~ handleSubmit ~ data', data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
     },
     changeEmail(e) {
       this.formData.email = e.target.value;
@@ -65,8 +93,8 @@ export default {
     changePassword(e) {
       this.formData.password = e.target.value;
     },
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>

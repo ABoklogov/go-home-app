@@ -1,8 +1,21 @@
 <template>
-  <AuthContainer class="login">
-    <CustomTitle class="login__title">Логин</CustomTitle>
-    <CustomForm ref="form" @submit.prevent="handleSubmit" class="login-form">
-      <div class="login__input">
+  <AuthContainer class="registration">
+    <CustomTitle class="registration__title">Логин</CustomTitle>
+    <CustomForm
+      ref="form"
+      @submit.prevent="handleSubmit"
+      class="registration-form"
+    >
+      <div class="registration__input">
+        <CustomInput
+          name="name"
+          type="name"
+          v-model:value="formData.name"
+          :rules="nameRules"
+          placeholder="Name"
+        />
+      </div>
+      <div class="registration__input">
         <CustomInput
           name="email"
           type="email"
@@ -11,17 +24,25 @@
           placeholder="Email"
         />
       </div>
-
+      <div class="registration__input">
+        <CustomInput
+          name="password"
+          type="password"
+          v-model:value="formData.password"
+          :rules="passwordRules"
+          placeholder="Password"
+        />
+      </div>
       <CustomInput
         name="password"
         type="password"
-        v-model:value="formData.password"
-        :rules="passwordRules"
-        class="login__input"
-        placeholder="Password"
+        v-model:value="formData.confirmPassword"
+        :rules="confirmPasswordRules"
+        class="registration__input"
+        placeholder="Confirm password"
       />
 
-      <MyButton type="submit" class="login__btn"> Вход </MyButton>
+      <MyButton type="submit" class="registration__btn"> Вход </MyButton>
     </CustomForm>
   </AuthContainer>
 </template>
@@ -36,11 +57,12 @@ import {
   emailValidation,
   passwordValidation,
   isRequered,
+  matchCheck,
 } from '../../../utils/validationRules';
-import { loginUser } from '../../../services/auth.services';
+import { registrationUser } from '../../../services/auth.services';
 
 export default {
-  name: 'LoginForm',
+  name: 'RegistrationForm',
   components: {
     CustomForm,
     CustomInput,
@@ -51,8 +73,10 @@ export default {
   data() {
     return {
       formData: {
+        name: '',
         email: '',
         password: '',
+        confirmPassword: '',
       },
     };
   },
@@ -62,7 +86,11 @@ export default {
         emailValidation,
         passwordValidation,
         isRequered,
+        matchCheck,
       };
+    },
+    nameRules() {
+      return [this.rules.isRequered];
     },
     emailRules() {
       return [this.rules.isRequered, this.rules.emailValidation];
@@ -70,14 +98,20 @@ export default {
     passwordRules() {
       return [this.rules.isRequered];
     },
+    confirmPasswordRules() {
+      return [this.rules.matchCheck(this.formData.password)];
+    },
   },
   methods: {
     async handleSubmit() {
-      const isFormValid = this.$refs.form.validate();
+      const form = this.$refs.form;
+      const isFormValid = form.validate();
+      const { name, email, password } = this.formData;
 
       if (isFormValid) {
         try {
-          const data = await loginUser(this.formData);
+          const data = await registrationUser({ name, email, password });
+          form.reset();
           console.log('🚀 ~ handleSubmit ~ data', data);
         } catch (error) {
           console.log(error);
@@ -89,7 +123,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login {
+.registration {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 29, 45, 0.5);
+    z-index: -1;
+  }
+
   &__form {
     display: block;
     flex-direction: column;

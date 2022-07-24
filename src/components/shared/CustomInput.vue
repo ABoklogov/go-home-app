@@ -4,6 +4,7 @@
       class="custom-input"
       :class="!isValid && 'custom-input--error'"
       @input="$emit('update:value', $event.target.value)"
+      @blur="blurHandler"
       v-bind="$attrs"
       :value="value"
     />
@@ -18,6 +19,7 @@ export default {
     return {
       isValid: true,
       error: '',
+      isFirstInput: true,
     };
   },
   inject: {
@@ -54,6 +56,8 @@ export default {
   //следим за вводом данных в инпут и проводим валидацию
   watch: {
     value() {
+      if (this.isFirstInput) return;
+
       this.validate();
     },
   },
@@ -70,9 +74,18 @@ export default {
         return hasPassed;
       }));
     },
+    // метод на событии blur (если первый визит на инпуте, то проводим валидацию)
+    blurHandler() {
+      if (this.isFirstInput) {
+        this.validate();
+      }
+      this.isFirstInput = false;
+    },
     // метод обнуления инпута
     reset() {
-      this.$emit('input', '');
+      this.isFirstInput = true;
+      this.isValid = true;
+      this.$emit('update:value', '');
     },
   },
 };

@@ -1,5 +1,5 @@
 <template>
-  <select class="select" @change="changeCity">
+  <select class="select" @change="$emit('update:value', $event.target.value)">
     <option
       v-for="item in formaredItems"
       :key="item.value"
@@ -14,18 +14,13 @@
 <script>
 export default {
   name: 'CustomSelect',
-
   props: {
     items: {
       type: Array,
       requeired: true,
     },
-    changeCity: {
-      type: Function,
-      requeired: true,
-    },
   },
-
+  emits: ['update:value'],
   computed: {
     formaredItems() {
       return this.items.map(item =>

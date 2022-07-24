@@ -6,8 +6,7 @@
         <CustomInput
           name="email"
           type="email"
-          :value="formData.email"
-          :changeValue="changeEmail"
+          v-model:value="formData.email"
           :rules="emailRules"
           class="login__input"
           placeholder="Email"
@@ -17,8 +16,7 @@
       <CustomInput
         name="password"
         type="password"
-        :value="formData.password"
-        :changeValue="changePassword"
+        v-model:value="formData.password"
         :rules="passwordRules"
         class="login__input"
         placeholder="Password"
@@ -86,12 +84,6 @@ export default {
           console.log(error);
         }
       }
-    },
-    changeEmail(e) {
-      this.formData.email = e.target.value;
-    },
-    changePassword(e) {
-      this.formData.password = e.target.value;
     },
   },
 };

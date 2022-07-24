@@ -3,16 +3,14 @@
     <div class="form-left-box">
       <CustomSelect
         :items="sities"
-        :changeCity="changeCity"
+        v-model:value="city"
         class="form__select"
       />
       <CustomInput
-        :value="price"
-        :changeValue="changePrice"
         :errorMessage="'Не должно быть пустым'"
+        v-model:value="price"
         :rules="rules"
         placeholder="Цена, от"
-        v-model="price"
       />
     </div>
 
@@ -68,12 +66,6 @@ export default {
   methods: {
     handleSubmit() {
       this.$emit('submitForm', { city: this.city, price: this.price });
-    },
-    changeCity(e) {
-      this.city = e.target.value;
-    },
-    changePrice(e) {
-      this.price = e.target.value;
     },
   },
 };

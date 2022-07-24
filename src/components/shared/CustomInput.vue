@@ -3,7 +3,7 @@
     <input
       class="custom-input"
       :class="!isValid && 'custom-input--error'"
-      @input="changeValue"
+      @input="$emit('update:value', $event.target.value)"
       v-bind="$attrs"
       :value="value"
     />
@@ -27,10 +27,6 @@ export default {
   },
   inheritAttrs: false,
   props: {
-    changeValue: {
-      type: Function,
-      required: true,
-    },
     value: {
       type: String,
       default: '',
@@ -44,6 +40,7 @@ export default {
       default: () => [],
     },
   },
+  emits: ['update:value'],
   //при маунте регистрируем инпут в компоненте формы CustomForm
   mounted() {
     if (!this.form) return;
